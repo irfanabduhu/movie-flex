@@ -2,12 +2,17 @@ const express = require("express");
 const sequelize = require("./config/database");
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req, res) =>
-  res.json({
-    status: "OK",
-    message: "Hello World",
+app.use("/movie", require("./routes/movie"));
+app.use("/cast", require("./routes/cast"));
+
+sequelize
+  .sync()
+  .then(() => {
+    app.listen(3333, () => console.log("Listening on http://localhost:3333"));
   })
-);
-
-app.listen(3333, () => console.log("Listening on http://localhost:3333"));
+  .catch((err) =>
+    console.error("Sequelize synchronization failed with error: ", err)
+  );
