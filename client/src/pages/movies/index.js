@@ -1,36 +1,55 @@
-import { useState } from "react";
-
-function Card({ movie }) {
-  return (
-    <div className="w-72 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <img className="rounded-t-lg" src={movie.posterUrl} alt="" />
-      <div className="p-5">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {movie.title}
-        </h5>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Release Year: {movie.releaseYear}
-        </p>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Tags:{" "}
-          {movie.tags?.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-        </p>
-        <p className="mb-3 font-normal text-gray-700">
-          Casts: {movie.Casts?.map((cast) => cast.name).join(", ")}
-        </p>
-      </div>
-    </div>
-  );
-}
+import Card from "@/components/movie/Card";
+import { useState, useMemo, useEffect } from "react";
 
 export default function MoviesPage({ movies }) {
+  const [title, setTitle] = useState("");
+  const [tag, setTag] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState(movies);
+
+  const handleSearch = () => {
+    const filtered = movies.filter(
+      (movie) =>
+        (!title || movie.title.toLowerCase().includes(title.toLowerCase())) &&
+        (!tag ||
+          movie.tags.some((t) => t.toLowerCase().includes(tag.toLowerCase())))
+    );
+    setFilteredMovies(filtered);
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [movies, title, tag]);
+
   return (
-    <div className="grid grid-cols-3 w-4/5 mx-auto">
-      {movies.map((movie) => (
-        <Card key={movie.id} movie={movie} />
-      ))}
+    <div className="w-4/5 mx-auto mt-4">
+      <div>
+        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900">
+          Filter Movies
+        </h1>
+        <div>
+          <input
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="title"
+            className="bg-gray-50 mb-2 mr-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 h-10"
+          />
+
+          <input
+            id="tag"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+            placeholder="tag"
+            className="bg-gray-50 mr-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-72 p-2.5 h-10"
+          />
+        </div>
+      </div>
+      <hr className="h-px my-6 bg-gray-200 border-0" />
+      <div className="grid grid-cols-2 gap-2">
+        {filteredMovies.map((movie) => (
+          <Card key={movie.id} movie={movie} />
+        ))}
+      </div>
     </div>
   );
 }
