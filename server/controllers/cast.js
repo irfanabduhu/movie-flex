@@ -41,6 +41,13 @@ exports.getByName = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const { name } = req.body;
+    
+    if (!name) {
+      res.status(400);
+      return res.json({
+        message: "Need to provide the required field 'name'",
+      });
+    }
     const cast = await Cast.create({ name });
     res.status(201);
     res.json({
