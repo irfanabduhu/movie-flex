@@ -49,6 +49,7 @@ exports.getByTitle = async (req, res) => {
   try {
     const movie = await Movie.findOne({
       where: { title: { [Op.iLike]: title } },
+      include: Cast,
     });
 
     if (!movie) {
@@ -114,12 +115,10 @@ exports.update = async (req, res) => {
   }
 
   try {
-    const [count, movies] = await Movie.update(
-      {
-        ...body,
-      },
-      { where: { id }, returning: true }
-    );
+    const [count, movies] = await Movie.update(body, {
+      where: { id },
+      returning: true,
+    });
 
     if (count === 0) {
       res.status(404);

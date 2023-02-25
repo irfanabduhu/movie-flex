@@ -13,7 +13,7 @@ exports.get = async (req, res) => {
       });
     }
 
-    const queryValue = req.query[queryName];
+    const queryValue = req.query[queryName].split("%20").join("+");
     const { data } = await axios.get(
       `${BASE_API_URL}${queryName}=${queryValue}`
     );
