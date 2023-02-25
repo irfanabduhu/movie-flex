@@ -29,13 +29,13 @@ exports.get = async (req, res) => {
       title: data.Title,
       releaseYear: data.Year,
       posterUrl: data.Poster,
-      cast: data.Actors?.split(", ") ?? [],
       tags: data.Genre?.split(", ") ?? [],
     };
 
     res.status(200);
     return res.json({
       movie,
+      casts: data.Actors?.split(", ") ?? [],
       message: "Successfully found the movie",
     });
   } catch (err) {

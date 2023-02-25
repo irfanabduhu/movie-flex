@@ -10,6 +10,7 @@ const Cast = sequelize.define("Cast", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
 });
 
