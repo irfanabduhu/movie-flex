@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const Movie = require("../models/movie");
+const Cast = require("../models/cast");
 
 exports.getAll = async (req, res) => {
   let movies;
@@ -13,17 +14,20 @@ exports.getAll = async (req, res) => {
             { tags: { [Op.contains]: [tag] } },
           ],
         },
+        include: Cast,
       });
     } else if (title) {
       movies = await Movie.findAll({
         where: { title: { [Op.iLike]: "%" + title + "%" } },
+        include: Cast,
       });
     } else if (tag) {
       movies = await Movie.findAll({
         where: { tags: { [Op.contains]: [tag] } },
+        include: Cast,
       });
     } else {
-      movies = await Movie.findAll();
+      movies = await Movie.findAll({ include: Cast });
     }
 
     const count = movies?.length ?? 0;
