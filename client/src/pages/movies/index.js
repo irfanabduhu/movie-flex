@@ -1,4 +1,5 @@
 import Card from "@/components/movie/Card";
+import Link from "next/link";
 import { useState, useMemo, useEffect } from "react";
 
 export default function MoviesPage({ movies }) {
@@ -47,7 +48,9 @@ export default function MoviesPage({ movies }) {
       <hr className="h-px my-6 bg-gray-200 border-0" />
       <div className="grid grid-cols-2 gap-2">
         {filteredMovies.map((movie) => (
-          <Card key={movie.id} movie={movie} />
+          <Link key={movie.id} href={"/movies/" + movie.title}>
+            <Card movie={movie} />
+          </Link>
         ))}
       </div>
     </div>
