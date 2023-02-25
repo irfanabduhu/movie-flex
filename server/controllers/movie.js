@@ -77,7 +77,8 @@ exports.create = async (req, res) => {
   if (!title || !plan || !rentPeriod || !rentPrice) {
     res.status(400);
     return res.json({
-      message: "These fields are required: title, plan, rentPeriod, rentPrice",
+      message:
+        "These fields are required: title, plan, rentPeriod, and rentPrice",
     });
   }
 

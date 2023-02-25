@@ -9,6 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use("/user", require("./routes/user"));
 app.use("/movie", require("./routes/movie"));
 app.use("/cast", require("./routes/cast"));
 app.use("/fetch", require("./routes/fetch"));
