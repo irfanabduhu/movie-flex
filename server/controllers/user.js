@@ -36,11 +36,11 @@ exports.getById = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password) {
+  const { name, email, password, plan } = req.body;
+  if (!name || !email || !password || !plan) {
     res.status(400);
     return res.json({
-      message: "These fields are required: name, email, and password",
+      message: "These fields are required: name, email, password, and plan",
     });
   }
 
@@ -49,6 +49,7 @@ exports.create = async (req, res) => {
       name,
       email,
       password,
+      plan,
     });
     res.status(201);
     res.json({

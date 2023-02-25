@@ -20,6 +20,10 @@ const User = sequelize.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  plan: {
+    type: DataTypes.ENUM("basic", "premium"),
+    allowNull: false,
+  },
 });
 
 module.exports = User;
