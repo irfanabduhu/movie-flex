@@ -1,11 +1,21 @@
 Run postgres docker image:
 
 ```
-docker run -d 
+docker run -d \
 -e POSTGRES_DB=movieDB \
 -e POSTGRES_USER=johndoe \
 -e POSTGRES_PASSWORD=123456 \
 -p 5434:5432 postgres
+```
+
+Run test db:
+
+```
+docker run -d \
+-e POSTGRES_DB=testDB \
+-e POSTGRES_USER=johndoe \
+-e POSTGRES_PASSWORD=123456 \
+-p 5435:5432 postgres
 ```
 
 I have used node v16 for this project. The backend resides in the `server` directory and the frontend resides in the `client` directory. Change directory to each of them and install the dependencies with `npm i`. 

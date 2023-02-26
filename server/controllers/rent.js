@@ -51,6 +51,42 @@ exports.getByMovieId = async (req, res) => {
   }
 };
 
+exports.getRentStatus = async (req, res) => {
+  const { userId, movieId } = req.query;
+
+  if (!userId || !movieId) {
+    return res.status(400).json({
+      message: "Need to provide the required fields 'userId', and 'movieId'",
+    });
+  }
+
+  try {
+    const rent = await Rent.findOne({
+      where: { MovieId: movieId, UserId: userId },
+    });
+
+    if (!rent) {
+      return res.status(404).json({
+        message: "User didn't rent this movie.",
+      });
+    }
+
+    if (new Date(rent.rentPeriod) < new Date()) {
+      return res.status(401).json({
+        message: "Rent expired.",
+      });
+    }
+
+    res.status(200).json({
+      message: `Rent valid till ${rent.rentPeriod}`,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: `An error occurred while fetching rent status: ${err.message}`,
+    });
+  }
+}; 
+
 exports.create = async (req, res) => {
   try {
     const { userId, movieId, rentPeriod, rentPrice } = req.body;

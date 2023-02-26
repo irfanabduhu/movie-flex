@@ -8,10 +8,10 @@ export default function Play({ movie }) {
       </h1>
       <div
         role="status"
-        class="flex items-center justify-center h-[80vh] w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
+        className="flex items-center justify-center h-[80vh] w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
       >
         <svg
-          class="w-12 h-12 text-gray-200 dark:text-gray-600"
+          className="w-12 h-12 text-gray-200 dark:text-gray-600"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           fill="currentColor"
