@@ -14,6 +14,7 @@ app.use("/auth", require("./routes/auth"));
 app.use("/user", require("./routes/user"));
 app.use("/movie", require("./routes/movie"));
 app.use("/cast", require("./routes/cast"));
+app.use("/rent", require("./routes/rent"));
 app.use("/fetch", require("./routes/fetch"));
 app.use("/catalogue", require("./routes/catalogue"));
 

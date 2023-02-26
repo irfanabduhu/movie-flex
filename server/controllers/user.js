@@ -45,10 +45,11 @@ exports.create = async (req, res) => {
   }
 
   try {
+    const hashedPassword = await generateHash(password);
     const user = await User.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       plan,
     });
     res.status(201);
