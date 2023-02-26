@@ -4,6 +4,10 @@
 
 The backend resides in the `server` directory and the frontend resides in the `client` directory. Change directory to each of them and install the dependencies with `npm i`. 
 
+# Test
+
+To run the test suites, change into `server` directory, then run `npm test`.
+
 ## Database
 Create and run dev database:
 
