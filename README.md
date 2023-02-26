@@ -2,12 +2,6 @@
 - Docker v23
 - Node v16.19.1 (through nvm)
 
-The backend resides in the `server` directory and the frontend resides in the `client` directory. Change directory to each of them and install the dependencies with `npm i`. 
-
-# Test
-
-To run the test suites, change into `server` directory, then run `npm test`.
-
 ## Database
 Create and run dev database:
 
@@ -28,6 +22,30 @@ docker run -d \
 -e POSTGRES_PASSWORD=123456 \
 -p 5435:5432 postgres
 ```
+
+## Start the development server
+
+The backend resides in the `server` directory and the frontend resides in the `client` directory. 
+
+For backend:
+
+```
+cd server
+npm i
+npm run dev
+```
+
+For frontend:
+
+```
+cd client
+npm i
+npm run dev
+```
+
+# Test
+
+To run the test suites, change into `server` directory, then run `npm test`.
 
 # API
 
