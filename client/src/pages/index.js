@@ -7,10 +7,10 @@ export default function Home() {
         <h1 className="text-4xl font-bold tracking-wide text-gray-900">
           Movie Flix
         </h1>
-        <h3>
+        <h3 className="text-blue-700">
           <Link href="/login">User Login</Link>
         </h3>
-        <h3>
+        <h3 className="text-blue-700">
           <Link href="/admin">Admin Dashboard</Link>
         </h3>
       </div>
