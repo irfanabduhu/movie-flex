@@ -15,7 +15,7 @@ exports.get = async (req, res) => {
     const queryValue = req.query[queryName].split("%20").join("+");
     const { data } = await axios.get(`${OMDb_URL}${queryName}=${queryValue}`);
 
-    if (!data) {
+    if (data.Response === "False") {
       res.status(404);
       return res.json({
         message: `Movie cannot be found.`,

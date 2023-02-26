@@ -16,7 +16,7 @@ const Movie = db.define(
       allowNull: false,
     },
     releaseYear: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     posterUrl: {

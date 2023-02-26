@@ -51,20 +51,15 @@ export default function Login() {
   };
 
   return (
-    <>
-      <div className="flex justify-between px-8 py-4">
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 ">
-          <Link href="/">Movie Flix</Link>
-        </h1>
-        <h3 className="text-right align-baseline">
-          <Link href="/admin">Admin dashboard &#10230;</Link>
-        </h3>
-      </div>
-      <section class="bg-gray-50 dark:bg-gray-900">
+    <div className="w-4/5 mx-auto">
+      <h1 className="py-4 text-4xl font-bold tracking-tight text-center text-gray-900 ">
+        <Link href="/">Movie Flix</Link>
+      </h1>
+      <section class="bg-gray-50">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
-          <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 ">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                 Log in to your account
               </h1>
               <form class="space-y-4 md:space-y-6" onSubmit={handleSignIn}>
@@ -110,11 +105,11 @@ export default function Login() {
                 >
                   Sign in
                 </button>
-                <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                <p class="text-sm font-light text-gray-500">
                   Don’t have an account yet?{" "}
                   <Link
                     href="/register"
-                    class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                    class="font-medium text-blue-600 hover:underline"
                   >
                     Register
                   </Link>
@@ -124,6 +119,6 @@ export default function Login() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

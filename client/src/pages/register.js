@@ -48,15 +48,10 @@ export default function RegisterPage() {
   };
 
   return (
-    <>
-      <div className="flex justify-between px-8 py-4">
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 ">
-          <Link href="/">Movie Flix</Link>
-        </h1>
-        <h3 className="text-right align-baseline">
-          <Link href="/admin">Admin dashboard &#10230;</Link>
-        </h3>
-      </div>
+    <div className="w-4/5 mx-auto">
+      <h1 className="py-4 text-4xl font-bold tracking-tight text-center text-gray-900 ">
+        <Link href="/">Movie Flix</Link>
+      </h1>
       <section class="bg-gray-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
           <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -160,6 +155,6 @@ export default function RegisterPage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
