@@ -1,6 +1,5 @@
-const API_KEY = "2d3dec64";
-const BASE_API_URL = `http://www.omdbapi.com/?apikey=${API_KEY}&`;
 const axios = require("axios");
+const OMDb_URL = `${process.env.BASE_API_URL}${process.env.API_KEY}&`;
 
 exports.get = async (req, res) => {
   try {
@@ -14,9 +13,7 @@ exports.get = async (req, res) => {
     }
 
     const queryValue = req.query[queryName].split("%20").join("+");
-    const { data } = await axios.get(
-      `${BASE_API_URL}${queryName}=${queryValue}`
-    );
+    const { data } = await axios.get(`${OMDb_URL}${queryName}=${queryValue}`);
 
     if (!data) {
       res.status(404);
