@@ -1,6 +1,6 @@
 export default function MovieCard({ movie }) {
   return (
-    <div className="flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+    <div className="flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow h-72 hover:bg-gray-100">
       <img
         src={movie.posterUrl}
         className="object-cover w-48 h-full rounded-l-lg"
