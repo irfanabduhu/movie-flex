@@ -1,4 +1,11 @@
-Run postgres docker image:
+# Setup
+- Docker v23
+- Node v16.19.1 (through nvm)
+
+The backend resides in the `server` directory and the frontend resides in the `client` directory. Change directory to each of them and install the dependencies with `npm i`. 
+
+## Database
+Create and run dev database:
 
 ```
 docker run -d \
@@ -8,7 +15,7 @@ docker run -d \
 -p 5434:5432 postgres
 ```
 
-Run test db:
+Create and run test database:
 
 ```
 docker run -d \
@@ -17,8 +24,6 @@ docker run -d \
 -e POSTGRES_PASSWORD=123456 \
 -p 5435:5432 postgres
 ```
-
-I have used node v16 for this project. The backend resides in the `server` directory and the frontend resides in the `client` directory. Change directory to each of them and install the dependencies with `npm i`. 
 
 # API
 
@@ -36,15 +41,34 @@ I have used node v16 for this project. The backend resides in the `server` direc
 - `PUT /cast/:id`  update cast details with given `id`
 - `DELETE /cast/:id`  delete the cast with given `id`.
 
+## CRUD on `user`
+- `GET /user`  fetch all users data.
+- `GET /user/:id`  fetch user with the given `id`.
+- `POST /user`  create a new user. Required fields: `name`, `email`, `password`, `plan`
+- `PUT /user/:id`  update the user with the given `id`.
+- `DELETE /user/:id`  delete the user with the given `id`.
+
 ## Fetch data from OMDb
 - `GET /fetch?t=[title]`  fetch data from OMDb with given `title`
 - `GET /fetch?i=[imdbId]`  fetch data from OMDb with given `imdbId`
 
 ## Catalogue
 - `GET /catalogue`  fetch all movies in the catalogue along with cast information.
-- `POST /catalogue` add a movie to catalogue. Required fields: `movie`, `casts`. `movie` should contain required fields: `title`, `plan`, `rentPeriod`, `rentPrice`. `casts` should be an array of cast names.
+- `GET /basic`  fetch all movies available in the basic plan.
+- `GET /premium`  fetch all movies available in the premium plan.
+- `POST /catalogue` add a movie to catalogue. Required fields: `movie`, `casts`. 
+  - `movie` should contain required fields: `title`, `plan`, `rentPeriod`, `rentPrice`. 
+  - `casts` should be an array of cast names.
 
-# Client
-## Routes
-- Admin dashboard route: `/admin`
-- Movies with filtering options: `/movies`
+## Auth
+- `POST /auth/register` register a user. Required fields: `name`, `email`, `password`, `plan`.
+- `POST /auth/login`  login a user. Required fields: `email`, `password`
+
+## Rent
+- `GET /rent`  fetch all rent data.
+- `GET /rent/status`  check rent status for a movie and a user. Required query parameters: `userId` and `movieId`
+- `GET /rent/user/:id`  fetch all rent data of the user with id `id`.
+- `GET /rent/movie/:id`  fetch all rent data of the movie with id `id`.
+- `POST /rent`  create a rent. Required fields: `userId`, `movieId`, `rentPeriod`, `rentPrice`.
+- `PUT /rent` update a rent. Required fields: `userId` and `movieId`.
+- `DELETE /rent` delete a rent. Required fields: `userId` and `movieId`.
