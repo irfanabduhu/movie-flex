@@ -45,7 +45,12 @@ npm run dev
 
 # Test
 
-To run the test suites, change into `server` directory, then run `npm test`.
+To run the test suites:
+
+```
+cd server
+npm test
+```
 
 # API
 
