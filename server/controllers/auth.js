@@ -41,5 +41,7 @@ exports.register = async (req, res) => {
 
   const token = await generateSignature({ id: user.id });
 
-  return res.status(200).json({ token, message: "Successfully registered" });
+  return res
+    .status(200)
+    .json({ userId: user.id, token, message: "Successfully registered" });
 };

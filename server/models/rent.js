@@ -1,7 +1,9 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const { sequelize, sequelizeTest } = require("../config/database");
 
-const Rent = sequelize.define("Rent", {
+const db = process.env.NODE_ENV === "test" ? sequelizeTest : sequelize;
+
+const Rent = db.define("Rent", {
   validTill: {
     type: DataTypes.DATE,
     allowNull: false,

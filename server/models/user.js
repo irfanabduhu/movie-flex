@@ -1,7 +1,9 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const { sequelize, sequelizeTest } = require("../config/database");
 
-const User = sequelize.define("User", {
+const db = process.env.NODE_ENV === "test" ? sequelizeTest : sequelize;
+
+const User = db.define("User", {
   id: {
     type: DataTypes.UUID,
     defaultValue: Sequelize.UUIDV4,

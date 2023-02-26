@@ -1,8 +1,12 @@
 const { cast } = require("sequelize");
-const sequelize = require("../config/database");
+const { sequelize, sequelizeTest } = require("../config/database");
+
 const Cast = require("../models/cast");
 const Movie = require("../models/movie");
-const Movie_Cast = sequelize.models["Movie_Cast"];
+
+const db = process.env.NODE_ENV === "test" ? sequelizeTest : sequelize;
+
+const Movie_Cast = db.models["Movie_Cast"];
 
 exports.getBasic = async (req, res) => {
   try {

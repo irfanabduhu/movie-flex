@@ -1,4 +1,5 @@
 const Rent = require("../models/rent");
+const User = require("../models/user");
 
 exports.getAll = async (req, res) => {
   try {
@@ -55,10 +56,17 @@ exports.create = async (req, res) => {
     const { userId, movieId, rentPeriod, rentPrice } = req.body;
 
     if (!userId || !movieId || !rentPeriod || !rentPrice) {
-      res.status(400);
-      return res.json({
+      return res.status(400).json({
         message:
           "Need to provide the required fields 'userId', 'movieId', 'rentPeriod', and 'rentPrice'",
+      });
+    }
+
+    const user = await User.findByPk(userId);
+    if (user.plan === "premium") {
+      return res.status(202).json({
+        message:
+          "You are on the premium plan. You can stream the movie without renting.",
       });
     }
 

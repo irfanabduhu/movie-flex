@@ -1,4 +1,3 @@
-const sequelize = require("../config/database");
 const Cast = require("../models/cast");
 
 exports.getAll = async (req, res) => {
@@ -41,7 +40,7 @@ exports.getByName = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const { name } = req.body;
-    
+
     if (!name) {
       res.status(400);
       return res.json({

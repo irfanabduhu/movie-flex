@@ -1,7 +1,9 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
+const { sequelize, sequelizeTest } = require("../config/database");
 
-const Movie = sequelize.define(
+const db = process.env.NODE_ENV === "test" ? sequelizeTest : sequelize;
+
+const Movie = db.define(
   "Movie",
   {
     id: {
