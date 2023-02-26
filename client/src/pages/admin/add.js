@@ -123,7 +123,7 @@ function Summary({ movie, casts }) {
       });
 
       if (res.status === 201) {
-        Router.push("/admin");
+        alert("Successfully added the movie to the catalogue");
       }
     } catch (err) {
       alert("Failed to add the movie to catalogue");
@@ -171,7 +171,7 @@ function Summary({ movie, casts }) {
             for="rentPeriod"
             className="block mb-1 mr-2 font-normal text-gray-700 "
           >
-            Rent Period:
+            Rent Period (in days):
           </label>
           <input
             id="rentPeriod"
@@ -203,7 +203,7 @@ function Summary({ movie, casts }) {
         <button
           type="submit"
           className="w-full py-2 font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:bg-gray-400 disabled:text-black"
-          disabled={!rentPrice || !rentPeriod}
+          disabled={!rentPrice || !rentPeriod || rentPeriod == 0}
           onClick={addToCatalogue}
         >
           Add to Catalogue

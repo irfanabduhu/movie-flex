@@ -84,7 +84,7 @@ export default function MovieDetails({ movie }) {
                 for="rentPeriod"
                 className="block mb-1 mr-2 font-normal text-gray-700 "
               >
-                Rent Period:
+                Rent Period (in days):
               </label>
               <input
                 id="rentPeriod"
@@ -117,7 +117,7 @@ export default function MovieDetails({ movie }) {
               <button
                 type="submit"
                 className="w-48 py-2 mr-2 font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:bg-gray-400 disabled:text-black"
-                disabled={!rentPrice || !rentPeriod}
+                disabled={!rentPrice || !rentPeriod || rentPeriod == 0}
                 onClick={updateMovie}
               >
                 Update movie
@@ -125,7 +125,6 @@ export default function MovieDetails({ movie }) {
               <button
                 type="submit"
                 className="w-48 py-2 font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 disabled:bg-gray-400 disabled:text-black"
-                disabled={!rentPrice || !rentPeriod}
                 onClick={deleteMovie}
               >
                 Delete movie
