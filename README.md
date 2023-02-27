@@ -57,7 +57,7 @@ npm test
 ## CRUD on `movie`
 - `GET /movie`  fetch all movies
 - `GET /movie/:title`  fetch movie with the given `title`
-- `POST /movie`  create a new movie. Required fields are: `title`, `plan`, `rentPeriod`, `rentPrice`
+- `POST /movie`  create a new movie. Required fields are: `title`, `plan`, `rentPeriod`, `rentPrice`. Optional fields are: `releaseYear`, `posterUrl`, and `tags`. `tags` should be an array of strings.
 - `PUT /movie/:id`  update movie details with given `id`
 - `DELETE /movie/:id`  delete the movie with given `id`.
 
