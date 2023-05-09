@@ -56,7 +56,7 @@ export default function MoviesPage({ movies }) {
         </div>
         <hr className="h-px my-6 bg-gray-200 border-0" />
         <div className="grid grid-cols-2 gap-2">
-          {filteredMovies.map((movie) => (
+          {filteredMovies?.map((movie) => (
             <Link key={movie.id} href={"/movies/" + movie.title}>
               <Card movie={movie} />
             </Link>

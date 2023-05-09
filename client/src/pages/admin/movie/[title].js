@@ -1,3 +1,4 @@
+import useUserInfo from "@/hooks/useUserInfo";
 import axios from "axios";
 import Link from "next/link";
 import Router from "next/router";
@@ -7,13 +8,20 @@ export default function MovieDetails({ movie }) {
   const [rentPrice, setRentPrice] = useState(movie.rentPrice);
   const [rentPeriod, setRentPeriod] = useState(movie.rentPeriod);
   const [plan, setPlan] = useState(movie.plan);
+  const [userInfo, setUserInfo] = useUserInfo();
 
   const updateMovie = async () => {
-    const res = await axios.put(`http://localhost:3333/movie/${movie.id}`, {
-      rentPeriod,
-      rentPrice,
-      plan,
-    });
+    const res = await axios.put(
+      `http://localhost:3333/movie/${movie.id}`,
+      {
+        rentPeriod,
+        rentPrice,
+        plan,
+      },
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      }
+    );
 
     if (res.status === 200) {
       alert("Successfully updated the movie details");
@@ -25,7 +33,9 @@ export default function MovieDetails({ movie }) {
   const deleteMovie = async () => {
     const shouldDelete = confirm("Are you sure you want to delete this movie?");
     if (!shouldDelete) return;
-    const res = await axios.delete(`http://localhost:3333/movie/${movie.id}`);
+    const res = await axios.delete(`http://localhost:3333/movie/${movie.id}`, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
     if (res.status === 204) {
       Router.push("/admin");
     } else {
@@ -58,14 +68,14 @@ export default function MovieDetails({ movie }) {
               Release Year: {movie.releaseYear}
             </p>
             <p className="mb-2 font-normal text-gray-700">
-              Tags: {movie.tags.join(", ")}
+              Tags: {movie?.tags?.join(", ") ?? ""}
             </p>
             <p className="mb-2 font-normal text-gray-700">
-              Casts: {movie.Casts.map((cast) => cast.name).join(", ")}
+              Casts: {movie.Casts?.map((cast) => cast.name).join(", ")}
             </p>
             <div className="mb-2">
               <label
-                for="rentPrice"
+                htmlFor="rentPrice"
                 className="block mb-1 mr-2 font-normal text-gray-700 "
               >
                 Rent Price:
@@ -81,7 +91,7 @@ export default function MovieDetails({ movie }) {
             </div>
             <div className="mb-2">
               <label
-                for="rentPeriod"
+                htmlFor="rentPeriod"
                 className="block mb-1 mr-2 font-normal text-gray-700 "
               >
                 Rent Period (in days):
@@ -97,7 +107,7 @@ export default function MovieDetails({ movie }) {
             </div>
             <div className="mb-3">
               <label
-                for="plan"
+                htmlFor="plan"
                 className="block mb-1 mr-2 font-normal text-gray-700 "
               >
                 Plan:

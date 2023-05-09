@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5434,
+            "driver": "PostgreSQL",
+            "database": "movieDB",
+            "username": "irfan",
+            "name": "movieDB",
+            "password": "123456"
+        }
+    ]
+}

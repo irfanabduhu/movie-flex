@@ -8,19 +8,24 @@ export default function MovieDetailsUser({ movie }) {
   const [playAccess, setPlayAccess] = useState(
     () => userInfo.plan === "premium"
   );
-  console.log(userInfo);
 
   const handleRentMovie = async () => {
     const userId = userInfo.userId;
     const movieId = movie.id;
 
     try {
-      const res = await axios.post("http://localhost:3333/rent", {
-        userId,
-        movieId,
-        rentPeriod: movie.rentPeriod,
-        rentPrice: movie.rentPrice,
-      });
+      const res = await axios.post(
+        "http://localhost:3333/rent",
+        {
+          userId,
+          movieId,
+          rentPeriod: movie.rentPeriod,
+          rentPrice: movie.rentPrice,
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
 
       if (res.status === 201) {
         alert("Successfully rented the movie");
@@ -33,16 +38,18 @@ export default function MovieDetailsUser({ movie }) {
     const checkStatus = async () => {
       const userId = userInfo.userId;
       const movieId = movie.id;
-
       try {
         const res = await axios.get("http://localhost:3333/rent/status", {
           params: { movieId, userId },
+          headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
         if (res.status === 200) {
           setPlayAccess(true);
         }
-      } catch (err) {}
+      } catch (err) {
+        console.log("Not rented yet");
+      }
     };
 
     if (movie.plan === "premium" && userInfo.plan === "basic") checkStatus();
@@ -72,10 +79,10 @@ export default function MovieDetailsUser({ movie }) {
               Release Year: {movie.releaseYear}
             </p>
             <p className="mb-2 font-normal text-gray-700">
-              Tags: {movie.tags.join(", ")}
+              Tags: {movie?.tags?.join(", ") ?? ""}
             </p>
             <p className="mb-2 font-normal text-gray-700">
-              Casts: {movie.Casts.map((cast) => cast.name).join(", ")}
+              Casts: {movie.Casts?.map((cast) => cast.name).join(", ")}
             </p>
             {playAccess || movie.plan === "basic" ? (
               <Link

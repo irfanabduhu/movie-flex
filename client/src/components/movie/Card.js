@@ -13,10 +13,10 @@ export default function MovieCard({ movie }) {
           Release Year: {movie.releaseYear}
         </p>
         <p className="mb-2 font-normal text-gray-700">
-          Tags: {movie.tags.join(", ")}
+          Tags: {movie?.tags?.join(", ") ?? ""}
         </p>
         <p className="mb-2 font-normal text-gray-700">
-          Casts: {movie.Casts.map((cast) => cast.name).join(", ")}
+          Casts: {movie.Casts?.map((cast) => cast.name).join(", ")}
         </p>
       </div>
     </div>

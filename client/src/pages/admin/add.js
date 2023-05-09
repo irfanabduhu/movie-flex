@@ -1,3 +1,4 @@
+import useUserInfo from "@/hooks/useUserInfo";
 import axios from "axios";
 import Link from "next/link";
 import Router from "next/router";
@@ -9,6 +10,7 @@ export default function AddMovie() {
   const [searchFailed, setSearchFailed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Search failed.");
   const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useUserInfo();
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -17,8 +19,10 @@ export default function AddMovie() {
     setLoading(true);
 
     try {
-      const res = await axios.get(`http://localhost:3333/fetch?t=${title}`);
-      console.log(res);
+      const res = await axios.get(`http://localhost:3333/fetch?t=${title}`, {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      });
+
       const { data } = res;
       setResult(data);
     } catch (err) {
@@ -109,18 +113,25 @@ function Summary({ movie, casts }) {
   const [rentPrice, setRentPrice] = useState(1.99);
   const [rentPeriod, setRentPeriod] = useState(7);
   const [plan, setPlan] = useState("basic");
+  const [userInfo, setUserInfo] = useUserInfo();
 
   const addToCatalogue = async () => {
     try {
-      const res = await axios.post("http://localhost:3333/catalogue", {
-        movie: {
-          ...movie,
-          rentPrice: +rentPrice,
-          rentPeriod: +rentPeriod,
-          plan,
+      const res = await axios.post(
+        "http://localhost:3333/catalogue",
+        {
+          movie: {
+            ...movie,
+            rentPrice: +rentPrice,
+            rentPeriod: +rentPeriod,
+            plan,
+          },
+          casts,
         },
-        casts,
-      });
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
 
       if (res.status === 201) {
         alert("Successfully added the movie to the catalogue");
@@ -145,14 +156,14 @@ function Summary({ movie, casts }) {
           Release Year: {movie.releaseYear}
         </p>
         <p className="mb-2 font-normal text-gray-700">
-          Tags: {movie.tags.join(", ")}
+          Tags: {movie?.tags?.join(", ") ?? ""}
         </p>
         <p className="mb-2 font-normal text-gray-700">
           Casts: {casts.join(", ")}
         </p>
         <div className="mb-2">
           <label
-            for="rentPrice"
+            htmlFor="rentPrice"
             className="block mb-1 mr-2 font-normal text-gray-700 "
           >
             Rent Price:
@@ -168,7 +179,7 @@ function Summary({ movie, casts }) {
         </div>
         <div className="mb-2">
           <label
-            for="rentPeriod"
+            htmlFor="rentPeriod"
             className="block mb-1 mr-2 font-normal text-gray-700 "
           >
             Rent Period (in days):
@@ -184,7 +195,7 @@ function Summary({ movie, casts }) {
         </div>
         <div className="mb-3">
           <label
-            for="plan"
+            htmlFor="plan"
             className="block mb-1 mr-2 font-normal text-gray-700 "
           >
             Plan:

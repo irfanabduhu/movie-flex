@@ -20,10 +20,8 @@ export default function Login() {
         password,
       });
 
-      console.log(res);
-
       if (res.status === 200) {
-        const { name, plan, id: userId } = res.data.user;
+        const { name, plan, role, id: userId } = res.data.user;
         const { token } = res.data;
         setUserInfo({
           name,
@@ -32,7 +30,12 @@ export default function Login() {
           email,
           token,
         });
-        Router.push("/movies");
+
+        if (role === "admin") {
+          Router.push("/admin");
+        } else {
+          Router.push("/movies");
+        }
       }
     } catch (err) {
       if (err.response.status === 401) {
@@ -55,18 +58,18 @@ export default function Login() {
       <h1 className="py-4 text-4xl font-bold tracking-tight text-center text-gray-900 ">
         <Link href="/">Movie Flix</Link>
       </h1>
-      <section class="bg-gray-50">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
-          <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 ">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+      <section className="bg-gray-50">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
+          <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 ">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                 Log in to your account
               </h1>
-              <form class="space-y-4 md:space-y-6" onSubmit={handleSignIn}>
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSignIn}>
                 <div>
                   <label
-                    for="email"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Your email
                   </label>
@@ -82,8 +85,8 @@ export default function Login() {
                 </div>
                 <div>
                   <label
-                    for="password"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    htmlFor="password"
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Password
                   </label>
@@ -105,11 +108,11 @@ export default function Login() {
                 >
                   Sign in
                 </button>
-                <p class="text-sm font-light text-gray-500">
+                <p className="text-sm font-light text-gray-500">
                   Don’t have an account yet?{" "}
                   <Link
                     href="/register"
-                    class="font-medium text-blue-600 hover:underline"
+                    className="font-medium text-blue-600 hover:underline"
                   >
                     Register
                   </Link>
