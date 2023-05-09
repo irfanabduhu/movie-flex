@@ -38,20 +38,21 @@ POST http://localhost:3333/auth/login
 Content-Type: application/json
 
 {
-    "email": "irfan@example.com",
+    "email": "rashed@example.com",
     "password": "123456"
 }
 
 ### GET user details
-GET http://localhost:3333/user/5557a47d-fca5-4f1c-a417-13901e24da8e
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1NTdhNDdkLWZjYTUtNGYxYy1hNDE3LTEzOTAxZTI0ZGE4ZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM2Mzc3Mzd9.5J_9aiqTTe58ONTFdedVUqg_xViNmCWSes51f8XbPK4
+GET http://localhost:3333/user/96a528fd-f641-4cc4-9884-b284ba1a40c9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk2YTUyOGZkLWY2NDEtNGNjNC05ODg0LWIyODRiYTFhNDBjOSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM2MzkwODF9.hEo3HpH7FEONMlRjq6dRHfqqWzdgEvRfRNe6Jzlq9xY
 
 ### Update a user information
-PUT http://localhost:3333/user/5557a47d-fca5-4f1c-a417-13901e24da8e
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1NTdhNDdkLWZjYTUtNGYxYy1hNDE3LTEzOTAxZTI0ZGE4ZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM2Mjg5MDR9.04E9T4skd_OXNosTHKq-KnF_assp-dvyL9bO_nFGYu4
+PUT http://localhost:3333/user/96a528fd-f641-4cc4-9884-b284ba1a40c9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk2YTUyOGZkLWY2NDEtNGNjNC05ODg0LWIyODRiYTFhNDBjOSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM2MzkwODF9.hEo3HpH7FEONMlRjq6dRHfqqWzdgEvRfRNe6Jzlq9xY
 
 {
-    "name": "Irfan"
+    "plan": "premium"
 }
 
 ###

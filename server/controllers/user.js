@@ -76,31 +76,33 @@ exports.create = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
+  const body = req.body;
   const { id } = req.params;
-  const { body, user } = req;
 
   if (!body) {
     return res.status(400).json({ message: "Request body is missing" });
   }
 
   try {
-    const [count, users] = await User.update(body, {
-      where: { id },
-      returning: true,
-    });
-
-    console.log(count, users, id);
-
-    if (count === 0) {
+    const user = await User.findByPk(id);
+    if (!user) {
       res.status(404).json({
         message: `User with id: '${id}' cannot be found.`,
       });
-    } else {
-      res.status(200).json({
-        user: users[0],
-        message: "Successfully updated the user.",
-      });
     }
+
+    await user.update(body);
+    await user.save();
+
+    res.status(200).json({
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        plan: user.plan,
+      },
+    });
   } catch (err) {
     res.status(500).json({
       message: `An error occurred while updating a user: ${err.message}`,
