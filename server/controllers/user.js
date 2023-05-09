@@ -1,8 +1,11 @@
 const User = require("../models/user");
+const { generateHash } = require("../utils/auth");
 
 exports.getAll = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      attributes: ["id", "name", "email", "role", "plan"],
+    });
     const count = users?.length ?? 0;
     res.status(200);
     res.json({
@@ -20,13 +23,15 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: ["id", "name", "email", "role", "plan"],
+    });
     if (!user) {
       res.status(404);
       return res.json({ message: `User with id: ${id} cannot be found.` });
     }
     res.status(200);
-    res.json({ user, message: "Successfully found the user" });
+    res.json({ user });
   } catch (err) {
     res.status(500);
     res.json({
@@ -54,7 +59,12 @@ exports.create = async (req, res) => {
     });
     res.status(201);
     res.json({
-      user,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        plan: user.plan,
+      },
       message: `Successfully created a user.`,
     });
   } catch (err) {
@@ -67,11 +77,10 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   const { id } = req.params;
-  const body = req.body;
+  const { body, user } = req;
 
   if (!body) {
-    res.status(400);
-    return res.json({ message: "Request body is missing" });
+    return res.status(400).json({ message: "Request body is missing" });
   }
 
   try {
@@ -80,21 +89,20 @@ exports.update = async (req, res) => {
       returning: true,
     });
 
+    console.log(count, users, id);
+
     if (count === 0) {
-      res.status(404);
-      return res.json({
+      res.status(404).json({
         message: `User with id: '${id}' cannot be found.`,
       });
+    } else {
+      res.status(200).json({
+        user: users[0],
+        message: "Successfully updated the user.",
+      });
     }
-
-    res.status(200);
-    res.json({
-      user: users[0],
-      message: "Successfully updated the user.",
-    });
   } catch (err) {
-    res.status(500);
-    res.json({
+    res.status(500).json({
       message: `An error occurred while updating a user: ${err.message}`,
     });
   }
@@ -106,18 +114,16 @@ exports.delete = async (req, res) => {
   try {
     const count = await User.destroy({ where: { id } });
     if (count === 0) {
-      res.status(404);
-      res.json({
+      res.status(404).json({
         message: `User with id: '${id}' cannot be found.`,
       });
+    } else {
+      res.status(204).json({
+        message: "Successfully deleted the user.",
+      });
     }
-    res.status(204);
-    res.json({
-      message: "Successfully deleted the user.",
-    });
   } catch (err) {
-    res.status(500);
-    res.json({
+    res.status(500).json({
       message: `An error occurred while deleting a user: ${err.message}`,
     });
   }

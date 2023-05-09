@@ -4,14 +4,12 @@ exports.getAll = async (req, res) => {
   try {
     const casts = await Cast.findAll();
     const count = casts?.length ?? 0;
-    res.status(200);
-    res.json({
+    res.status(200).json({
       casts,
       message: `Found ${count} ${count > 1 ? "casts" : "cast."}`,
     });
   } catch (err) {
-    res.status(500);
-    res.json({
+    res.status(500).json({
       message: err.message,
     });
   }
@@ -22,18 +20,13 @@ exports.getByName = async (req, res) => {
   try {
     const cast = await Cast.findOne({ where: { name } });
     if (!cast) {
-      res.status(404);
-      return res.json({
+      return res.status(404).json({
         message: `Cast with name '${name}' cannot be found.`,
       });
     }
-    res.status(200);
-    res.json({
-      cast,
-    });
+    res.status(200).json({ cast });
   } catch (err) {
-    res.status(500);
-    res.json({ message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -100,7 +93,7 @@ exports.delete = async (req, res) => {
     const count = await Cast.destroy({ where: { id } });
     if (count === 0) {
       res.status(404);
-      res.json({
+      return res.json({
         message: `Cast with id: '${id}' cannot be found.`,
       });
     }

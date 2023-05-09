@@ -1,0 +1,96 @@
+### Admin Login
+POST http://localhost:3333/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@example.com",
+    "password": "abracadabra"
+}
+
+### GET all users [Admin Only]
+GET http://localhost:3333/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxMWViMDljLTJjMDctNGQ4Ny1hNDc2LTg3OTJjZmQ1MjkzNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4MzYyOTE5NH0.0-v0UNSGTYixaCi3DdO9X6iXLA1IaMWTYUyNntkaq9U
+
+### CREATE a new user
+POST http://localhost:3333/user
+Content-Type: application/json
+
+{
+    "name": "Irfanul Hoque",
+    "email": "irfan@example.com",
+    "password": "123456",
+    "plan": "basic"
+}
+
+### Create another user
+POST http://localhost:3333/user
+Content-Type: application/json
+
+{
+    "name": "Rashed",
+    "email": "rashed@example.com",
+    "password": "123456",
+    "plan": "basic"
+}
+
+### Login with a user
+POST http://localhost:3333/auth/login
+Content-Type: application/json
+
+{
+    "email": "irfan@example.com",
+    "password": "123456"
+}
+
+### GET user details
+GET http://localhost:3333/user/5557a47d-fca5-4f1c-a417-13901e24da8e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1NTdhNDdkLWZjYTUtNGYxYy1hNDE3LTEzOTAxZTI0ZGE4ZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM2Mzc3Mzd9.5J_9aiqTTe58ONTFdedVUqg_xViNmCWSes51f8XbPK4
+
+### Update a user information
+PUT http://localhost:3333/user/5557a47d-fca5-4f1c-a417-13901e24da8e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1NTdhNDdkLWZjYTUtNGYxYy1hNDE3LTEzOTAxZTI0ZGE4ZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM2Mjg5MDR9.04E9T4skd_OXNosTHKq-KnF_assp-dvyL9bO_nFGYu4
+
+{
+    "name": "Irfan"
+}
+
+###
+DELETE http://localhost:3333/user/069be76e-00d9-4c00-8f83-784fbdf5955a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdlMjhmZjNmLTczMGMtNGM3My04ZjFhLTM3ODMzYmI5NTA4OSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM2Mjg3Nzh9.9GQmMXiVDcqjc3MfM3cFBd_hGmxEdj8TrRskdlj9UtQ
+
+# Movies
+### Get all movies
+GET http://localhost:3333/movie
+
+### Get movie by title
+GET http://localhost:3333/movie/Titanic
+
+### Create a movie
+POST http://localhost:3333/movie
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxMWViMDljLTJjMDctNGQ4Ny1hNDc2LTg3OTJjZmQ1MjkzNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4MzYyOTE5NH0.0-v0UNSGTYixaCi3DdO9X6iXLA1IaMWTYUyNntkaq9U
+Content-Type: application/json
+
+{
+    "title": "Titanic",
+    "plan": "basic",
+    "rentPeriod": 7,
+    "rentPrice": 2.7
+}
+
+### Update a movie
+PUT http://localhost:3333/movie/d6897f58-2ead-42ca-ba16-f0293938e082
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxMWViMDljLTJjMDctNGQ4Ny1hNDc2LTg3OTJjZmQ1MjkzNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4MzYyOTE5NH0.0-v0UNSGTYixaCi3DdO9X6iXLA1IaMWTYUyNntkaq9U
+Content-Type: application/json
+
+{
+    "releaseYear": "2010"
+}
+
+### Delete a movie
+DELETE http://localhost:3333/movie/cd96c31c-c0d2-4398-b7eb-59d2abd97448
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUxMWViMDljLTJjMDctNGQ4Ny1hNDc2LTg3OTJjZmQ1MjkzNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4MzYyOTE5NH0.0-v0UNSGTYixaCi3DdO9X6iXLA1IaMWTYUyNntkaq9U
+
+
+###
+GET http://localhost:3333/rent/status?movieId=2f76b01a-73f8-4acc-8b6a-321de382687d&userId=5557a47d-fca5-4f1c-a417-13901e24da8e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1NTdhNDdkLWZjYTUtNGYxYy1hNDE3LTEzOTAxZTI0ZGE4ZSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM2MzMzOTV9.1ib8n7tCl8st47N0K44rvCY-vikO6c-uGa-mv8YKOo4

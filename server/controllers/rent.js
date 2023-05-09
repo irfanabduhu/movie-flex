@@ -53,7 +53,6 @@ exports.getByMovieId = async (req, res) => {
 
 exports.getRentStatus = async (req, res) => {
   const { userId, movieId } = req.query;
-
   if (!userId || !movieId) {
     return res.status(400).json({
       message: "Need to provide the required fields 'userId', and 'movieId'",
@@ -64,6 +63,8 @@ exports.getRentStatus = async (req, res) => {
     const rent = await Rent.findOne({
       where: { MovieId: movieId, UserId: userId },
     });
+
+    console.log(movieId, userId, rent);
 
     if (!rent) {
       return res.status(404).json({
@@ -78,7 +79,7 @@ exports.getRentStatus = async (req, res) => {
     }
 
     res.status(200).json({
-      message: `Rent valid till ${rent.rentPeriod}`,
+      validTill: rent.validTill,
     });
   } catch (err) {
     res.status(500).json({

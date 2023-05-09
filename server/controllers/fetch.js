@@ -6,7 +6,7 @@ exports.get = async (req, res) => {
     const queryName = req.query.t ? "t" : req.query.i ? "i" : "";
     if (!queryName) {
       res.status(400);
-      res.json({
+      return res.json({
         message:
           "Please provide query parameter 'i' for IMDb id or 't' for title",
       });
