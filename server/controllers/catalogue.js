@@ -74,10 +74,10 @@ exports.add = async (req, res) => {
       tags: movie.tags,
     });
     const responseCasts = await Promise.all(
-      casts.map((cast) => Cast.upsert({ name: cast }))
+      casts?.map((cast) => Cast.upsert({ name: cast }))
     );
     await Promise.all(
-      responseCasts.map(([cast, _]) =>
+      responseCasts?.map(([cast, _]) =>
         Movie_Cast.create({ MovieId: responseMovie.id, CastId: cast.id })
       )
     );

@@ -31,14 +31,12 @@ exports.getAll = async (req, res) => {
     }
 
     const count = movies?.length ?? 0;
-    res.status(200);
-    res.json({
+    res.status(200).json({
       movies,
       message: `Found ${count} ${count > 1 ? "movies" : "movie."}`,
     });
   } catch (err) {
-    res.status(500);
-    res.json({
+    res.status(500).json({
       message: `An error occurred while fetching movies: ${err.message}`,
     });
   }
@@ -53,19 +51,16 @@ exports.getByTitle = async (req, res) => {
     });
 
     if (!movie) {
-      res.status(404);
-      return res.json({
+      return res.status(404).json({
         message: `Movie with title '${title}' cannot be found.`,
       });
     }
 
-    res.status(200);
-    res.json({
+    res.status(200).json({
       movie,
     });
   } catch (err) {
-    res.status(500);
-    res.json({
+    res.status(500).json({
       message: `An error occurred: ${err.message}`,
     });
   }
@@ -75,8 +70,7 @@ exports.create = async (req, res) => {
   const { title, plan, rentPeriod, rentPrice, releaseYear, posterUrl, tags } =
     req.body;
   if (!title || !plan || !rentPeriod || !rentPrice) {
-    res.status(400);
-    return res.json({
+    return res.status(400).json({
       message:
         "These fields are required: title, plan, rentPeriod, and rentPrice",
     });
@@ -93,14 +87,11 @@ exports.create = async (req, res) => {
       tags,
     });
 
-    res.status(201);
-    res.json({
+    res.status(201).json({
       movie,
-      message: `Successfully created a movie.`,
     });
   } catch (err) {
-    res.status(500);
-    res.json({
+    res.json(500).json({
       messsage: `An error occurred while creating a movie. Error: ${err.message}`,
     });
   }
@@ -111,8 +102,7 @@ exports.update = async (req, res) => {
   const body = req.body;
 
   if (!body) {
-    res.status(400);
-    return res.json({ message: "Request body is missing" });
+    return res.status(400).json({ message: "Request body is missing" });
   }
 
   try {
@@ -122,20 +112,17 @@ exports.update = async (req, res) => {
     });
 
     if (count === 0) {
-      res.status(404);
-      return res.json({
+      return res.status(404).json({
         message: `Movie with id: '${id}' cannot be found.`,
       });
     }
 
-    res.status(200);
-    res.json({
+    res.status(200).json({
       movie: movies[0],
       message: "Successfully updated the movie.",
     });
   } catch (err) {
-    res.status(500);
-    res.json({
+    res.status(500).json({
       message: `An error occurred while updating a movie: ${err.message}`,
     });
   }
@@ -145,18 +132,15 @@ exports.delete = async (req, res) => {
   try {
     const count = await Movie.destroy({ where: { id } });
     if (count === 0) {
-      res.status(404);
-      res.json({
+      return res.status(404).json({
         message: `Movie with id: '${id}' cannot be found.`,
       });
     }
-    res.status(204);
-    res.json({
+    res.status(204).json({
       message: "Successfully deleted the movie.",
     });
   } catch (err) {
-    res.status(500);
-    res.json({
+    res.status(500).json({
       message: `An error occurred while deleting a movie: ${err.message}`,
     });
   }

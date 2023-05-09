@@ -1,5 +1,6 @@
 const { sequelize } = require("./config/database");
 const app = require("./app");
+const { generateHash } = require("./utils/auth");
 
 sequelize
   .sync()

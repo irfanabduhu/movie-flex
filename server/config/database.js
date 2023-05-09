@@ -1,11 +1,11 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
-  "postgres://johndoe:123456@localhost:5434/movieDB"
+  "postgres://irfan:123456@localhost:5434/movieDB"
 );
 
 const sequelizeTest = new Sequelize(
-  "postgres://johndoe:123456@localhost:5435/testDB"
+  "postgres://irfan:123456@localhost:5435/testDB"
 );
 
 sequelize

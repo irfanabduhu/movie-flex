@@ -16,11 +16,13 @@ exports.login = async (req, res) => {
     if (!validPass)
       return res.status(401).json({ message: "Credentials do not match" });
 
-    const token = await generateSignature({ id: user.id });
+    const token = await generateSignature({
+      id: user.id,
+      isAdmin: user.role === "admin",
+    });
     return res.status(200).json({
-      user: { name: user.name, plan: user.plan, id: user.id },
+      user: { name: user.name, plan: user.plan, id: user.id, role: user.role },
       token,
-      message: "Successfully logged in",
     });
   } catch (err) {
     res.status(500).json({
@@ -49,12 +51,14 @@ exports.register = async (req, res) => {
     if (!user)
       return res.status(400).json({ message: "Could not save the user" });
 
-    const token = await generateSignature({ id: user.id });
+    const token = await generateSignature({
+      id: user.id,
+      isAdmin: user.role === "admin",
+    });
 
-    return res.status(200).json({
+    res.status(200).json({
       userId: user.id,
       token,
-      message: "Successfully registered",
     });
   } catch (err) {
     res.status(500).json({
