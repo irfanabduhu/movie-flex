@@ -8,7 +8,7 @@ Create and run dev database:
 ```
 docker run -d \
 -e POSTGRES_DB=movieDB \
--e POSTGRES_USER=johndoe \
+-e POSTGRES_USER=irfan \
 -e POSTGRES_PASSWORD=123456 \
 -p 5434:5432 postgres
 ```
@@ -18,7 +18,7 @@ Create and run test database:
 ```
 docker run -d \
 -e POSTGRES_DB=testDB \
--e POSTGRES_USER=johndoe \
+-e POSTGRES_USER=irfan \
 -e POSTGRES_PASSWORD=123456 \
 -p 5435:5432 postgres
 ```

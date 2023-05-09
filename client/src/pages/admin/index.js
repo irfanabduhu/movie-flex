@@ -14,7 +14,7 @@ export default function Dashboard({ movies }) {
             <Link href="/admin/add">Add to Catalogue</Link>
           </h3>
           <h3 className="text-right text-red-700 align-baseline">
-            <Link href="/">Home &#10230;</Link>
+            <Link href="/">Exit &#10230;</Link>
           </h3>
         </div>
       </div>

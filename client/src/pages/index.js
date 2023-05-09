@@ -8,10 +8,7 @@ export default function Home() {
           Movie Flix
         </h1>
         <h3 className="text-blue-700">
-          <Link href="/login">User Login</Link>
-        </h3>
-        <h3 className="text-blue-700">
-          <Link href="/admin">Admin Dashboard</Link>
+          <Link href="/login">Login</Link>
         </h3>
       </div>
     </div>

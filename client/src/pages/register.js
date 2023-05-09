@@ -52,21 +52,21 @@ export default function RegisterPage() {
       <h1 className="py-4 text-4xl font-bold tracking-tight text-center text-gray-900 ">
         <Link href="/">Movie Flix</Link>
       </h1>
-      <section class="bg-gray-50">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
-          <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight ">
+      <section className="bg-gray-50">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
+          <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight ">
                 Log in to your account
               </h1>
               <form
-                class="space-y-4 md:space-y-6"
+                className="space-y-4 md:space-y-6"
                 onSubmit={handleRegistration}
               >
                 <div>
                   <label
-                    for="name"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    htmlFor="name"
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Your Name
                   </label>
@@ -83,8 +83,8 @@ export default function RegisterPage() {
 
                 <div>
                   <label
-                    for="email"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Your email
                   </label>
@@ -100,8 +100,8 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <label
-                    for="password"
-                    class="block mb-2 text-sm font-medium text-gray-900 "
+                    htmlFor="password"
+                    className="block mb-2 text-sm font-medium text-gray-900 "
                   >
                     Password
                   </label>
@@ -118,7 +118,7 @@ export default function RegisterPage() {
 
                 <div className="mb-3">
                   <label
-                    for="plan"
+                    htmlFor="plan"
                     className="block mb-1 mr-2 font-normal text-gray-700 "
                   >
                     Plan:
@@ -141,11 +141,11 @@ export default function RegisterPage() {
                 >
                   Register
                 </button>
-                <p class="text-sm font-light text-gray-500">
+                <p className="text-sm font-light text-gray-500">
                   Do you have an account?{" "}
                   <Link
                     href="/login"
-                    class="font-medium text-blue-600 hover:underline"
+                    className="font-medium text-blue-600 hover:underline"
                   >
                     Log in
                   </Link>
